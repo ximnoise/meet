@@ -22,5 +22,5 @@ describe('<App /> component', () => {
   test('render number of events component', () => {
     expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
   });
-
+  
 });
