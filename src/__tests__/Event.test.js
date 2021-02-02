@@ -11,17 +11,17 @@ describe('<Event />, component', () => {
   })
 
   test('render correct event details', () => {
-    expect(EventWrapper.find('.event-container')).toHaveLength(1);
+    expect(EventWrapper.find('.event')).toHaveLength(1);
   });
 
   test('render show event-details', () => {
     EventWrapper.setState({ showHideDetails: true });
-    EventWrapper.find('.show-hide-btn').simulate('click');
+    EventWrapper.find('.details-btn').simulate('click');
   });
 
   test('render hide event-details', () => {
     EventWrapper.setState({ showHideDetails: false });
-    EventWrapper.find('.show-hide-btn').simulate('click');
+    EventWrapper.find('.details-btn').simulate('click');
   });
 
 });

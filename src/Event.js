@@ -17,19 +17,23 @@ class Event extends Component {
     const { event } = this.props;
 
     return (
-      <div className="event-container">
-        <h1>{event.summary}</h1>
+      <div className="event">
+        <h2>{event.summary}</h2>
         <p>{event.start.dateTime}</p>
-        <p>{event.location}</p>
+        <p>@{event.summary} | {event.location}</p>
         {this.state.showHideDetails && (
           <div className='event-details'>
-            <h2>About event:</h2>
-            <a href={event.htmlLink}>See Details on Google Calendar</a>
-            <p>{event.description}</p>
+            <h3>About event:</h3>
+            <h4>
+              <a href={event.htmlLink} target="_blank" rel="nooponer noreferrer">
+                See Details on Google Calendar
+              </a>
+            </h4>
+            <p className="description">{event.description}</p>
           </div>
         )}
-        <button 
-          className="show-hide-btn"
+        <button
+          className="details-btn"
           onClick={() => this.handleShowHideButton()}
         >
           {!this.state.showHideDetails ? 'show details' : 'hide details'}
