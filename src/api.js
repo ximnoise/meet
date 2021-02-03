@@ -19,9 +19,7 @@ const getEvents = async () => {
   if (token) {
     removeQuery();
     const url =
-      'https://yib3acn0wb.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
-      '/' +
-      token;
+      `https://yib3acn0wb.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
@@ -47,7 +45,7 @@ const getAccessToken = async () => {
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
   // If no token or invalid token, retrieve new token through google authorization
-  if (!accessToken || tokenCheck.error) {
+  if (!accessToken || !tokenCheck) {
     await localStorage.removeItem('access_token'); // Remove invalid token
 
     // Look for authorization code
@@ -75,7 +73,7 @@ const checkToken = async (accessToken) => {
     .then((res) => res.json())
     .catch((error) => error.json());
 
-  return result;
+  return result.error ? false : true;
 };
 
 // Gets new token from AWS Lamba if there is no token or invalid token
