@@ -83,3 +83,16 @@ import NProgress from 'nprogress';
    }
    return accessToken;
  };
+
+ const getToken = async (code) => {
+   const encodeCode = encodeURIComponent(code);
+   const { access_Token } = await fetch('https://yib3acn0wb.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode)
+   .then((res) => {
+     return res.json();
+    })
+   .catch((error) => error);
+
+   access_Token && localStorage.setItem('access_token', access_Token);
+
+   return access_Token;
+ };
