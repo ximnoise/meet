@@ -2,24 +2,25 @@ import { mockData } from './mock-data';
 import axios from 'axios';
 import NProgress from 'nprogress';
 
-
-// ===== Data Retrieval Functions ===== //
-
+// *===== Data Retrieval Functions *===== //
 const getEvents = async () => {
   NProgress.start();
 
   // Return mockData for local user
   if (window.location.href.startsWith('http://localhost')) {
     NProgress.done();
-    return mockData;
+    return { events: mockData, locations: extractLocations(mockData)};
   }
 
-  // Calls API to retrieve events data
   const token = await getAccessToken();
+
+  // Calls API to retrieve events data
   if (token) {
     removeQuery();
     const url =
-      `https://yib3acn0wb.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
+      'https://yib3acn0wb.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
+      '/' +
+      token;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
@@ -27,7 +28,7 @@ const getEvents = async () => {
       localStorage.setItem('locations', JSON.stringify(locations));
     }
     NProgress.done();
-    return result.data.events;
+    return { events: result.data.events, locations };
   }
 };
 
@@ -37,8 +38,7 @@ const extractLocations = (events) => {
   return locations;
 };
 
-// ===== Authentication & Authorization Functions ===== //
-
+// *===== Authentication & Authorization Functions =====* //
 const getAccessToken = async () => {
   // Looks for pre-existing token in storage & check validity
   const accessToken = localStorage.getItem('access_token');
@@ -46,11 +46,11 @@ const getAccessToken = async () => {
 
   // If no token or invalid token, retrieve new token through google authorization
   if (!accessToken || !tokenCheck) {
-    await localStorage.removeItem('access_token'); // Remove invalid token
+    localStorage.removeItem('access_token'); // Remove invalid token
 
     // Look for authorization code
     const searchParams = new URLSearchParams(window.location.search);
-    const code = await searchParams.get('code');
+    const code = searchParams.get('code');
 
     // If no auth code, redirect to Google Auth screen to sign in and retrieve code
     if (!code) {
@@ -80,7 +80,7 @@ const checkToken = async (accessToken) => {
 const getToken = async (code) => {
   removeQuery();
   const encodeCode = encodeURIComponent(code);
-  const { access_Token } = await fetch(
+  const { access_token } = await fetch(
     `https://yib3acn0wb.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
   )
     .then((res) => {
@@ -88,23 +88,23 @@ const getToken = async (code) => {
     })
     .catch((error) => error);
 
-  access_Token && localStorage.setItem('access_token', access_Token);
+  access_token && localStorage.setItem('access_token', access_token);
 
-  return access_Token;
+  return access_token;
 };
 
 // Removes code from URL after it is used
 const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {
-    var newUrl =
+    var newurl =
       window.location.protocol +
       '//' +
       window.location.host +
       window.location.pathname;
-    window.history.pushState('', '', newUrl);
+    window.history.pushState('', '', newurl);
   } else {
-    newUrl = window.location.protocol + '//' + window.location.host;
-    window.history.pushState('', '', newUrl);
+    newurl = window.location.protocol + '//' + window.location.host;
+    window.history.pushState('', '', newurl);
   }
 };
 
@@ -114,7 +114,7 @@ export {
   extractLocations,
   removeQuery,
   checkToken,
-  getToken
+  getToken,
 };
 
 

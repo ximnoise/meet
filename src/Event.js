@@ -2,41 +2,80 @@ import React, { Component } from 'react';
 
 class Event extends Component {
   state = {
-    showHideDetails: false
+    isExpanded: false, // Event is collapsed by default
   };
 
-  handleShowHideButton = () => {
-    if (this.state.showHideDetails === true) {
-      this.setState({ showHideDetails: false });
+  // Toggle expand/collapse event on click
+  handleExpandEvent = () => {
+    if (this.state.isExpanded === false) {
+      this.setState({
+        isExpanded: true,
+      });
     } else {
-      this.setState({ showHideDetails: true });
+      this.setState({
+        isExpanded: false,
+      });
     }
   };
+
+  // The elements displayed when event is expanded
+  renderExpandedComponent = () => {
+    const { event } = this.props;
+
+    if (this.state.isExpanded) {
+      return (
+        <div className='Expanded-Event'>
+          <h4>About event:</h4>
+          <div className='link-container'>
+            <a
+              className='link'
+              href={event.htmlLink}
+              rel='noreferrer'
+              target='_blank'
+            >
+              See details on Google Calendar
+            </a>
+          </div>
+          <p className='description'>{event.description}</p>
+        </div>
+      );
+    }
+  };
+
+  // Toggles button text
+  renderButtonText = () => {
+    return !this.state.isExpanded ? 'Show details' : 'Hide details';
+  };
+
+  // Reformats time data using moment.js
+  /*renderTime = () => {
+    const time = this.props.event.start.dateTime;
+    const formattedTime = moment(time, 'YYYY-MM-DD HH:mm').toDate();
+    return <span className='start-dateTime'>{`${formattedTime}`}</span>;
+  }; */
 
   render() {
     const { event } = this.props;
 
     return (
-      <div className="event">
-        <h2>{event.summary}</h2>
-        <p>{event.start.dateTime}</p>
-        <p>@{event.summary} | {event.location}</p>
-        {this.state.showHideDetails && (
-          <div className='event-details'>
-            <h3>About event:</h3>
-            <h4>
-              <a href={event.htmlLink} target="_blank" rel="nooponer noreferrer">
-                See Details on Google Calendar
-              </a>
-            </h4>
-            <p className="description">{event.description}</p>
+      <div className='Event'>
+        <div className='heading'>
+          <h2 className='summary'>{event.summary}</h2>
+          <div className='subheading'>
+            <div className='time'>{event.start.dateTime}</div>
+            <div className='location-container'>
+              <span className='summary-2'>@{event.summary} | </span>
+              <span className='location'>{event.location}</span>
+            </div>
           </div>
-        )}
+        </div>
+        <div>{this.renderExpandedComponent()}</div>
         <button
-          className="details-btn"
-          onClick={() => this.handleShowHideButton()}
+          type='button'
+          className='btn-details'
+          onClick={this.handleExpandEvent}
         >
-          {!this.state.showHideDetails ? 'show details' : 'hide details'}
+          {this.renderButtonText()}
         </button>
       </div>
     );
