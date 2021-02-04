@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'moment';
 
 class Event extends Component {
   state = {
@@ -47,22 +48,16 @@ class Event extends Component {
     return !this.state.isExpanded ? 'Show details' : 'Hide details';
   };
 
-  // Reformats time data using moment.js
-  /*renderTime = () => {
-    const time = this.props.event.start.dateTime;
-    const formattedTime = moment(time, 'YYYY-MM-DD HH:mm').toDate();
-    return <span className='start-dateTime'>{`${formattedTime}`}</span>;
-  }; */
-
   render() {
     const { event } = this.props;
+    const eventTime = Moment(event.start.dateTime).format('MM-DD-YYYY');
 
     return (
       <div className='Event'>
         <div className='heading'>
           <h2 className='summary'>{event.summary}</h2>
           <div className='subheading'>
-            <div className='time'>{event.start.dateTime}</div>
+            <div className='time'>{eventTime}</div>
             <div className='location-container'>
               <span className='summary-2'>@{event.summary} | </span>
               <span className='location'>{event.location}</span>
