@@ -48,16 +48,22 @@ class Event extends Component {
     return !this.state.isExpanded ? 'Show details' : 'Hide details';
   };
 
+  // Formats time data
+  formatTime = () => {
+    const time = this.props.event.start.dateTime;
+    const formattedTime = Moment(time, 'YYYY-MM-DD HH:mm').toDate();
+    return <span className='start-dateTime'>{`${formattedTime}`}</span>
+  };
+
   render() {
     const { event } = this.props;
-    const eventTime = Moment(event.start.dateTime).format('MM-DD-YYYY');
 
     return (
       <div className='Event'>
         <div className='heading'>
           <h2 className='summary'>{event.summary}</h2>
           <div className='subheading'>
-            <div className='time'>{eventTime}</div>
+            <div className='time'>{this.formatTime()}</div>
             <div className='location-container'>
               <span className='summary-2'>@{event.summary} | </span>
               <span className='location'>{event.location}</span>
