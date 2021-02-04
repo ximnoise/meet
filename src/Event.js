@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Moment from 'moment';
+import moment from 'moment';
 
 class Event extends Component {
   state = {
@@ -51,7 +51,7 @@ class Event extends Component {
   // Formats time data
   formatTime = () => {
     const time = this.props.event.start.dateTime;
-    const formattedTime = Moment(time, 'YYYY-MM-DD HH:mm').toDate();
+    const formattedTime = moment(time).format("dddd, MMMM Do YYYY, h:mm a");
     return <span className='start-dateTime'>{`${formattedTime}`}</span>
   };
 
