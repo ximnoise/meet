@@ -9,10 +9,10 @@
 }
 
 // Variables
-$color-primary: #7289da;
-$color-dark: #2c2f33;
-$color-light: #ffffff;
-$color-bg: #23272a;
+$color-primary: #c51f5d;
+$color-dark: #243447;
+$color-light: #f0f8ff;
+$color-bg: #141d26;
 
 // General Styles
 body {
@@ -38,8 +38,8 @@ body {
     opacity: 0.9;
     font-weight: bold;
     color: $color-primary;
-    font-weight: normal;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    margin-bottom: 5px;
   }
 
   input {
