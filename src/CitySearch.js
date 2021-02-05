@@ -17,7 +17,7 @@ class CitySearch extends Component {
     this.props.updateEvents(suggestion);
   };
 
-  // Displays suggestions based on user input (autocomplete feature)
+  // Displays suggestions based on user input
   handleChange = (event) => {
     const value = event.target.value;
     this.setState({ showSuggestions: true})

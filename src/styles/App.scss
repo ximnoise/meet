@@ -171,20 +171,54 @@ body {
     font-size: 1.1em;
   }
 
+  .location-container {
+    margin-bottom: 3em;
+  }
+
   .btn-details {
     font-family: 'Roboto', sans-serif;
     border: none;
     background-color: $color-primary;
     color: #ffffff;
-    width: 100px;
     font-size: 1em;
     position: absolute;
     right: 1em;
     bottom: 1em;
-    padding: 0.6em 0.3em;
-    border-radius: 5px;
+    padding: 8px;
     outline: none;
+    text-transform: uppercase;
     cursor: pointer;
+  }
+  .btn-details:before,
+  .btn-details:after {
+    border-color: $color-primary;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    border-style: solid;
+    border-width: 0;
+    content:"";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+  }
+  .btn-details:before {
+    border-left-width: 2px;
+    border-top-width: 2px;
+    left: -5px;
+    top: -5px;
+  }
+
+  .btn-details:after {
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    bottom: -5px;
+    right: -5px;
+  }
+  .btn-details:hover:before,
+  .btn-details:hover:after
+  {
+    height:100%;
+    width:100%;
   }
 
   .Expanded-Event {
@@ -203,3 +237,5 @@ body {
     }
   }
 }
+
+
