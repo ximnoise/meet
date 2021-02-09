@@ -59,7 +59,7 @@ class Event extends Component {
     const { event } = this.props;
 
     return (
-      <div className='Event'>
+      <div className='event'>
         <div className='heading'>
           <h2 className='summary'>{event.summary}</h2>
           <div className='subheading'>
