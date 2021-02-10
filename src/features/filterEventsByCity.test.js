@@ -12,9 +12,8 @@ const locations = extractLocations(mockData);
 defineFeature(feature, test => {
   test('When user hasn’t searched for a city, show upcoming events from all cities.', ({ given, when, then }) => {
     let AppWrapper;
-    given('user hasn’t searched for any city', () => {
 
-    });
+    given('user hasn’t searched for any city', () => {});
     when('the user opens the app', () => {
       AppWrapper = mount(<App />);
     });
@@ -26,6 +25,7 @@ defineFeature(feature, test => {
 
   test('User should see a list of suggestions when they search for a city', ({ given, when, then }) => {
     let CitySearchWrapper;
+
     given('the main page is open', () => {
       CitySearchWrapper = shallow(<CitySearch updateEvents={() => {}} locations={locations} />);
     });
@@ -40,6 +40,7 @@ defineFeature(feature, test => {
 
   test('User can select a city from the suggested list', ({ given, and, when, then }) => {
     let AppWrapper;
+
     given('user was typing “Berlin” in the city textbox', async () => {
       AppWrapper = await mount(<App />);
       AppWrapper.find('.city').simulate('change', { target: { value: 'Berlin' } });
