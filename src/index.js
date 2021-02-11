@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-// import reportWebVitals from './reportWebVitals';
+import * as atatus from 'atatus-spa';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
 
-// reportWebVitals();
+atatus.config('4fb78490f5a849feb5fa824789f66b30').install();
+atatus.notify(new Error('Test Atatus Setup'));
