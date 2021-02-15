@@ -21,7 +21,7 @@ class App extends Component {
     const accessToken = localStorage.getItem('access_token');
     const validToken = accessToken !== null ? await checkToken(accessToken) : false;
     this.setState({ tokenCheck: validToken });
-    if (validToken === true) {
+    if (validToken === true)
       this.updateEvents()
       const searchParams = new URLSearchParams(window.location.search);
       const code = searchParams.get('code');
@@ -30,7 +30,6 @@ class App extends Component {
         this.setState({ tokenCheck: true });
         this.updateEvents();
       }
-    }
 
     getEvents().then((response) => {
       if (this.mounted) {
