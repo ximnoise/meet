@@ -38,16 +38,16 @@ const extractLocations = (events) => {
 // *===== Authentication & Authorization Functions =====* //
 const getAccessToken = async () => {
   // Looks for pre-existing token in storage & check validity
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = await localStorage.getItem('access_token');
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
   // If no token or invalid token, retrieve new token through google authorization
   if (!accessToken || !tokenCheck) {
-    localStorage.removeItem('access_token'); // Remove invalid token
+    await localStorage.removeItem('access_token'); // Remove invalid token
 
     // Look for authorization code
     const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get('code');
+    const code = await searchParams.get('code');
 
     // If no auth code, redirect to Google Auth screen to sign in and retrieve code
     if (!code) {

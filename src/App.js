@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
-import { getEvents, extractLocations } from './api';
+import Login from './Login';
+import { getEvents, extractLocations, checkToken } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -12,12 +13,24 @@ class App extends Component {
     locations: [],
     currentLocation: 'all',
     numberOfEvents: '24',
+    tokenCheck: false
   };
   // numberOfEvents uses a string to prevent type conversion
 
-  componentDidMount() {
-    this.mounted = true;
-
+  async componentDidMount() {
+    const accessToken = localStorage.getItem('access_token');
+    const validToken = accessToken !== null ? await checkToken(accessToken) : false;
+    this.setState({ tokenCheck: validToken });
+    if (validToken === true) {
+      this.updateEvents()
+      const searchParams = new URLSearchParams(window.location.search);
+      const code = searchParams.get('code');
+      this.mounted = true;
+      if (code && this.mounted === true && validToken === false) {
+        this.setState({ tokenCheck: true });
+        this.updateEvents();
+      }
+    }
     getEvents().then((response) => {
       if (this.mounted) {
         this.setState({
@@ -71,9 +84,13 @@ class App extends Component {
   };
 
   render() {
-    const { numberOfEvents, events, locations } = this.state;
+    const { numberOfEvents, events, locations, tokenCheck } = this.state;
 
-    return (
+    return tokenCheck === false ? (
+      <div className="App">
+        <Login />
+      </div>
+    ) : (
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch
