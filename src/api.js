@@ -42,7 +42,7 @@ const getAccessToken = async () => {
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
   // If no token or invalid token, retrieve new token through google authorization
-  if (!accessToken || tokenCheck.error) {
+  if (!accessToken || !tokenCheck) {
     await localStorage.removeItem('access_token'); // Remove invalid token
 
     // Look for authorization code

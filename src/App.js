@@ -21,24 +21,24 @@ class App extends Component {
     const accessToken = localStorage.getItem('access_token');
     const validToken = accessToken !== null ? await checkToken(accessToken) : false;
     this.setState({ tokenCheck: validToken });
-    if (validToken === true)
-      this.updateEvents()
-      const searchParams = new URLSearchParams(window.location.search);
-      const code = searchParams.get('code');
-      this.mounted = true;
-      if (code && this.mounted === true && validToken === false) {
-        this.setState({ tokenCheck: true });
-        this.updateEvents();
-      }
+    if (validToken === true) this.updateEvents()
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get('code');
 
-    getEvents().then((response) => {
+    this.mounted = true;
+    if (code && this.mounted === true && validToken === false) {
+      this.setState({ tokenCheck: true });
+      this.updateEvents();
+    }
+
+    /* getEvents().then((response) => {
       if (this.mounted) {
         this.setState({
           events: response.events.slice(0, this.state.numberOfEvents),
           locations: extractLocations(response.events),
         });
       }
-    });
+    }); */
   }
 
   componentWillUnmount() {
