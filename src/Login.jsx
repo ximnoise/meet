@@ -9,7 +9,7 @@ function Login() {
       </h4>
       <div className="btn-google">
         <a
-          class="btn-login"
+          className="btn-login"
           href="https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.readonly&response_type=code&client_id=599445530558-r804ljdavn98l072h16mrqdi22lv9q48.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fximnoise.github.io%2Fmeet"
           rel="nofollow noopener"
         >
@@ -23,7 +23,7 @@ function Login() {
       </div>
       <a
         className="btn-privacy"
-        href="https://ximnoise.github.io/meet/privacy.html"
+        href="https://ximnoise.github.io/meet/"
         rel="nofollow noopener"
       >
         Privacy policy
