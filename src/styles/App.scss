@@ -33,12 +33,6 @@ body {
     letter-spacing: 1px;
     font-size: 2.5em;
   }
-  a {
-    color: $color-light;
-    font-size: 1.1em;
-    font-weight: bold;
-    text-decoration: none;
-  }
   h2,
   h4,
   label {
@@ -310,6 +304,7 @@ body {
 
   .btn-privacy {
     position: relative;
+    color: $color-light;
     top: 40px;
   }
 }

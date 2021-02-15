@@ -3,7 +3,7 @@ import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
 import Login from './Login';
-import { getEvents, extractLocations, checkToken } from './api';
+import { getEvents, checkToken } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -102,13 +102,6 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <EventList events={events} />
-        <a
-          className='btn-privacy'
-          href='https://ximnoise.github.io/meet/privacy.html'
-          rel='nofollow noopener'
-        >
-          Privacy policy
-        </a>
       </div>
     );
   }
