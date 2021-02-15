@@ -103,6 +103,13 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <EventList events={events} />
+        <a
+          className='btn-privacy'
+          href='https://ximnoise.github.io/meet/privacy.html'
+          rel='nofollow noopener'
+        >
+          Privacy policy
+        </a>
       </div>
     );
   }
