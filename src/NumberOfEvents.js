@@ -15,11 +15,6 @@ class NumberOfEvents extends Component {
       this.setState({
         errorText: 'Please enter a positive number of events.'
       });
-    } else if (value < 1) {
-      this.setState({
-        numberOfEvents: value,
-        errorText: 'Please specify at least 1 event to be displayed.'
-      });
     } else {
       this.props.updateEvents(null, value);
       this.setState({ numberOfEvents: value });

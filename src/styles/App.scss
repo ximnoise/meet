@@ -76,6 +76,7 @@ body {
   font-weight: bold;
   font-style: italic;
   margin-top: 0.5em;
+  z-index: 3;
 }
 
 // CitySearch Component
@@ -105,7 +106,7 @@ body {
     z-index: 2;
     align-self: center;
     margin: 0;
-    top: 65px;
+    top: 74px;
     font-size: 14px;
   }
 
