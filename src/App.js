@@ -107,7 +107,7 @@ class App extends Component {
           numberOfEvents={numberOfEvents}
           updateEvents={this.updateEvents}
         />
-        <WarningAlert className='alert' text={this.state.warningText} />
+        <WarningAlert text={this.state.warningText} />
         <EventList events={events} />
       </div>
     );

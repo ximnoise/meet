@@ -72,8 +72,10 @@ body {
   text-align: center;
 }
 
-.alert {
-  z-index: 2;
+.Alert {
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 0.5em;
 }
 
 // CitySearch Component
