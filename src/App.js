@@ -4,6 +4,7 @@ import CitySearch from './CitySearch';
 import EventList from './EventList';
 import Login from './Login';
 import { getEvents, checkToken } from './api';
+import { WarningAlert } from './Alert';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -13,7 +14,8 @@ class App extends Component {
     locations: [],
     currentLocation: 'all',
     numberOfEvents: '24',
-    tokenCheck: false
+    tokenCheck: false,
+    warningText: ''
   };
   // numberOfEvents uses a string to prevent type conversion
 
@@ -49,6 +51,8 @@ class App extends Component {
   updateEvents = (location, eventCount) => {
     const { currentLocation, numberOfEvents } = this.state;
 
+    this.setState({ warningText: 'Please wait, events are loading...' });
+
     // If user selects a location from input
     if (location) {
       getEvents().then((response) => {
@@ -62,6 +66,7 @@ class App extends Component {
           events: events,
           currentLocation: location,
           locations: response.locations,
+          warningText: ''
         });
       });
     } else {
@@ -78,6 +83,7 @@ class App extends Component {
           events: events,
           numberOfEvents: eventCount,
           locations: response.locations,
+          warningText: ''
         });
       });
     }
@@ -101,6 +107,7 @@ class App extends Component {
           numberOfEvents={numberOfEvents}
           updateEvents={this.updateEvents}
         />
+        <WarningAlert className='alert' text={this.state.warningText} />
         <EventList events={events} />
       </div>
     );

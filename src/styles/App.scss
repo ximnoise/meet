@@ -72,6 +72,10 @@ body {
   text-align: center;
 }
 
+.alert {
+  z-index: 1;
+}
+
 // CitySearch Component
 .CitySearch {
   display: flex;
