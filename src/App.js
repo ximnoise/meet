@@ -20,7 +20,6 @@ class App extends Component {
   // numberOfEvents uses a string to prevent type conversion
 
   async componentDidMount() {
-    this.mounted = true;
     if (!navigator.onLine) {
       this.setState({
         warningText: 'You are currently offline and the app shows the data from your last visit. Data will not be up-to-date.'
@@ -31,11 +30,7 @@ class App extends Component {
       });
     }
 
-    if (this.mounted) {
-      this.updateEvents();
-    }
-
-    /*
+    this.mounted = true;
     const accessToken = localStorage.getItem('access_token');
     const validToken = accessToken !== null ? await checkToken(accessToken) : false;
     this.setState({ tokenCheck: validToken });
@@ -49,7 +44,7 @@ class App extends Component {
       this.updateEvents();
     }
 
-    getEvents().then((response) => {
+    /* getEvents().then((response) => {
       if (this.mounted) {
         this.setState({
           events: response.events.slice(0, this.state.numberOfEvents),
@@ -96,14 +91,12 @@ class App extends Component {
                 (event) => event.location === currentLocation
               );
         const events = locationEvents.slice(0, eventCount);
-        if (this.mounted) {
-          return this.setState({
-            events: events,
-            numberOfEvents: eventCount,
-            locations: response.locations,
-            warningText: ''
-          });
-        }
+        return this.setState({
+          events: events,
+          numberOfEvents: eventCount,
+          locations: response.locations,
+          warningText: ''
+        });
       });
     }
   };
@@ -111,7 +104,11 @@ class App extends Component {
   render() {
     const { numberOfEvents, events, locations, tokenCheck } = this.state;
 
-    return (
+    return tokenCheck === false ? (
+      <div className="App">
+        <Login />
+      </div>
+    ) : (
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch
@@ -130,9 +127,3 @@ class App extends Component {
 }
 
 export default App;
-
-/*tokenCheck === false ? (
-  <div className="App">
-    <Login />
-  </div>
-) : */
