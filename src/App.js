@@ -96,12 +96,14 @@ class App extends Component {
                 (event) => event.location === currentLocation
               );
         const events = locationEvents.slice(0, eventCount);
-        return this.setState({
-          events: events,
-          numberOfEvents: eventCount,
-          locations: response.locations,
-          warningText: ''
-        });
+        if (this.mounted) {
+          return this.setState({
+            events: events,
+            numberOfEvents: eventCount,
+            locations: response.locations,
+            warningText: ''
+          });
+        }
       });
     }
   };
