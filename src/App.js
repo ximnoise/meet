@@ -109,11 +109,7 @@ class App extends Component {
   render() {
     const { numberOfEvents, events, locations, tokenCheck } = this.state;
 
-    return tokenCheck === false ? (
-      <div className="App">
-        <Login />
-      </div>
-    ) : (
+    return (
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch
@@ -132,3 +128,9 @@ class App extends Component {
 }
 
 export default App;
+
+/*tokenCheck === false ? (
+  <div className="App">
+    <Login />
+  </div>
+) : */
