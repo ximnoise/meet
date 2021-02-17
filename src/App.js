@@ -21,17 +21,6 @@ class App extends Component {
   // numberOfEvents uses a string to prevent type conversion
 
   async componentDidMount() {
-    if (!navigator.onLine) {
-      this.setState({
-        warningText: 'You are currently offline and the app shows the data from your last visit. Data will not be up-to-date.'
-      });
-    } else {
-      this.setState({
-        warningText: ''
-      });
-    }
-
-    this.mounted = true;
     const accessToken = localStorage.getItem('access_token');
     const validToken = accessToken !== null ? await checkToken(accessToken) : false;
     this.setState({ tokenCheck: validToken });
@@ -39,7 +28,7 @@ class App extends Component {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get('code');
 
-
+    this.mounted = true;
     if (code && this.mounted === true && validToken === false) {
       this.setState({ tokenCheck: true });
       this.updateEvents();
@@ -69,14 +58,10 @@ class App extends Component {
         warningText: 'You are currently offline and the app shows the data from your last visit. Data will not be up-to-date.'
       });
       NProgress.done();
-    } else {
+    } else if (location) { // If user selects a location from input
       this.setState({
         warningText: 'Please wait, events are loading...'
       });
-    }
-
-    // If user selects a location from input
-    if (location) {
       getEvents().then((response) => {
         // Applies new filter for location
         const locationEvents =
