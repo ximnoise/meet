@@ -3,7 +3,6 @@ import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
 import Login from './Login';
-import NProgress from 'nprogress';
 import { getEvents, checkToken } from './api';
 import { WarningAlert } from './Alert';
 import './styles/App.scss';
@@ -33,16 +32,6 @@ class App extends Component {
       this.setState({ tokenCheck: true });
       this.updateEvents();
     }
-
-    /* getEvents().then((response) => {
-      if (this.mounted) {
-        this.setState({
-          events: response.events.slice(0, this.state.numberOfEvents),
-          locations: extractLocations(response.events),
-        });
-      }
-    });
-    */
   }
 
   componentWillUnmount() {
@@ -57,7 +46,6 @@ class App extends Component {
       this.setState({
         warningText: 'You are currently offline and the app shows the data from your last visit. Data will not be up-to-date.'
       });
-      NProgress.done();
     } else if (location) { // If user selects a location from input
       this.setState({
         warningText: 'Please wait, events are loading...'
