@@ -20,6 +20,16 @@ class App extends Component {
   // numberOfEvents uses a string to prevent type conversion
 
   async componentDidMount() {
+    if (!navigator.onLine) {
+      this.setState({
+        warningText: 'You are currently offline and the app shows the data from your last visit. Data will not be up-to-date.'
+      });
+    } else {
+      this.setState({
+        warningText: ''
+      })
+    }
+
     const accessToken = localStorage.getItem('access_token');
     const validToken = accessToken !== null ? await checkToken(accessToken) : false;
     this.setState({ tokenCheck: validToken });
