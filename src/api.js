@@ -14,6 +14,15 @@ const getEvents = async () => {
 
   const token = await getAccessToken();
 
+  if (!navigator.onLine) {
+    const events = localStorage.getItem('lastEvents');
+    NProgress.done();
+    return {
+      events: JSON.parse(events).events,
+      locations: extractLocations(JSON.parse(events).events)
+    };
+  }
+
   // Calls API to retrieve events data
   if (token) {
     removeQuery();
