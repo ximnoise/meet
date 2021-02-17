@@ -20,6 +20,7 @@ class App extends Component {
   // numberOfEvents uses a string to prevent type conversion
 
   async componentDidMount() {
+    this.mounted = true;
     if (!navigator.onLine) {
       this.setState({
         warningText: 'You are currently offline and the app shows the data from your last visit. Data will not be up-to-date.'
@@ -27,9 +28,14 @@ class App extends Component {
     } else {
       this.setState({
         warningText: ''
-      })
+      });
     }
 
+    if (this.mounted) {
+      this.updateEvents();
+    }
+
+    /*
     const accessToken = localStorage.getItem('access_token');
     const validToken = accessToken !== null ? await checkToken(accessToken) : false;
     this.setState({ tokenCheck: validToken });
@@ -37,20 +43,21 @@ class App extends Component {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get('code');
 
-    this.mounted = true;
+
     if (code && this.mounted === true && validToken === false) {
       this.setState({ tokenCheck: true });
       this.updateEvents();
     }
 
-    /* getEvents().then((response) => {
+    getEvents().then((response) => {
       if (this.mounted) {
         this.setState({
           events: response.events.slice(0, this.state.numberOfEvents),
           locations: extractLocations(response.events),
         });
       }
-    }); */
+    });
+    */
   }
 
   componentWillUnmount() {
