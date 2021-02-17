@@ -1,4 +1,4 @@
-# Description
+## Description
 Meet App is a serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. The application uses the Google Calendar API to fetch upcoming events. The serverless function is hosted by the cloud provider AWS.
 
 Meet App alows users to search for events hosted in a specified city. The user can view charts that display how many events will take place in that specified city as well the popularity of event genres in form of a pie chart.
