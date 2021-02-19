@@ -17,7 +17,9 @@ const EventGenre = ({ events }) => {
       return { name: genre, value };
     })
     return data;
-  }
+  };
+
+  const colors = ['#e1f7d5', '#ffbdbd', '#c9c9ff', '#ffffff', '#f1cbff'];
 
   return (
     <ResponsiveContainer height={400} >
@@ -28,10 +30,15 @@ const EventGenre = ({ events }) => {
           cy='50%'
           labelLine={false}
           outerRadius={80}
-          fill='#8884d8'
+          fill='#c51f5d'
           dataKey='value'
           label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
         >
+          {
+            data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} name={entry.name} />
+            ))
+          }
         </Pie>
         <Legend layout='horizontal' align='center' verticalAlign='top'></Legend>
       </PieChart>
