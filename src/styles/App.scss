@@ -76,6 +76,10 @@ body {
     align-items: center;
     flex-direction: column;
   }
+
+  div#undefined.recharts-responsive-container {
+    width: 100%;
+  }
 }
 
 // Alert Component
@@ -302,6 +306,23 @@ body {
     font-size: 1.1em;
     font-weight: bold;
     text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .data-vis-wrapper {
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+  }
+
+  div#undefined.recharts-responsive-container {
+    width: 100%;
+  }
+
+  .recharts-surface {
+    overflow: visible;
   }
 }
 
