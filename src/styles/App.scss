@@ -67,7 +67,7 @@ p {
   text-align: center;
   padding: 1% 5%;
   background-color: $color-bg;
-  font-family: $font-header;
+  font-family: $font-body;
   font-size: $font-size-big;
 }
 
@@ -250,7 +250,7 @@ label.CitySearch-label {
 .Alert {
   position: fixed;
   top: 100px;
-  right: 250px;
+  right: 400px;
   font-weight: $font-weight-big;
   background-color: $color-light;
   font-size: 1.5rem;
