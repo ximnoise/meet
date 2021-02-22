@@ -272,14 +272,14 @@ div#undefined.recharts-responsive-container {
 @media screen and (max-width: 767px) {
 
   .Alert {
-    top: 5px;
-    left: 0;
+    top: 70px;
+    left: 10px;
+    right: 10px;
     font-size: 1rem;
-    padding: 10px;
   }
 
   h1 {
-    margin: 15px 5px auto;
+    margin: 0 auto;
   }
 
   h3 {
@@ -305,10 +305,6 @@ div#undefined.recharts-responsive-container {
     right: 10px;
     bottom: 25px;
     padding: 5px;
-  }
-
-  h1 {
-    margin: 0 auto;
   }
 
   .event {
