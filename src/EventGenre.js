@@ -1,4 +1,3 @@
-import { setCustomData } from 'atatus-spa';
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 
@@ -26,19 +25,20 @@ const EventGenre = ({ events }) => {
       <PieChart>
         <Pie
           data={data}
-          cx='47%'
-          cy='50%'
+          cy={150}
           labelLine={false}
-          outerRadius={80}
+          outerRadius={60}
           fill='#c51f5d'
           dataKey='value'
           label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
         >
-          {
-            data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} name={entry.name} />
-            ))
-          }
+          {data.map((entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={colors[index % colors.length]}
+              name={entry.name}
+            />
+          ))}
         </Pie>
         <Legend layout='horizontal' align='center' verticalAlign='top'></Legend>
       </PieChart>
