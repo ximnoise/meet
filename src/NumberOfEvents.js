@@ -11,7 +11,7 @@ class NumberOfEvents extends Component {
   handleChange = (event) => {
     const value = event.target.value;
 
-    if (value < 0) {
+    if (value < 1) {
       this.setState({
         errorText: 'Please enter a positive number of events.'
       });
@@ -25,14 +25,16 @@ class NumberOfEvents extends Component {
     const { numberOfEvents } = this.state;
     return (
       <div className='NumberOfEvents'>
-        <label>Number of events</label>
+        <label className="eventNumLabel">Number of Events:</label>
         <input
           type='number'
-          className='number'
+          className='eventNumInput'
           value={numberOfEvents}
           onChange={this.handleChange}
         />
-        <ErrorAlert text={this.state.errorText} />
+        <div id='ErrorAlert'>
+          <ErrorAlert text={this.state.errorText}/>
+        </div>
       </div>
     );
   }

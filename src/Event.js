@@ -25,19 +25,10 @@ class Event extends Component {
 
     if (this.state.isExpanded) {
       return (
-        <div className='Expanded-Event'>
-          <h4>About event:</h4>
-          <div className='link-container'>
-            <a
-              className='link'
-              href={event.htmlLink}
-              rel='noreferrer'
-              target='_blank'
-            >
-              See details on Google Calendar
-            </a>
-          </div>
-          <p className='description'>{event.description}</p>
+        <div className='eventExpanded'>
+          <button className="eventCard--link"><a href={event.htmlLink}>Click to Attend Event</a></button>
+          <p className="eventCard--description"><span>Description: </span>{event.description}</p>
+          <p className="eventCard--organizer"><span>Organizer: </span>{event.organizer.email}</p>
         </div>
       );
     }
@@ -60,15 +51,11 @@ class Event extends Component {
 
     return (
       <div className='event'>
-        <div className='heading'>
-          <h2 className='summary'>{event.summary}</h2>
-          <div className='subheading'>
-            <div className='time'>{this.formatTime()}</div>
-            <div className='location-container'>
-              <span className='summary-2'>@{event.summary} | </span>
-              <span className='location'>{event.location}</span>
-            </div>
-          </div>
+        <div className='eventCard'>
+          <h2 className='eventCard--name'>{event.summary}</h2>
+          <p className='eventCard--date'><span>Starts at: </span>{this.formatTime()}</p>
+          <p className='eventCard--date'><span>Timezone: </span>{event.start.timeZone}</p>
+          <p className='eventCard--location'><span>Location: </span>{event.location}</p>
         </div>
         <div>{this.renderExpandedComponent()}</div>
         <button
