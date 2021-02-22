@@ -21,13 +21,15 @@ const EventGenre = ({ events }) => {
   const colors = ['#e1f7d5', '#ffbdbd', '#c9c9ff', '#ffffff', '#f1cbff'];
 
   return (
-    <ResponsiveContainer height={400} >
+    <ResponsiveContainer height={300} >
       <PieChart>
         <Pie
           data={data}
-          cy={150}
+          cx='47%'
+          cy='50%'
           labelLine={false}
-          outerRadius={60}
+          legendType='square'
+          outerRadius={80}
           fill='#c51f5d'
           dataKey='value'
           label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
